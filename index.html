@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ловец звезд</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="top-bar" aria-label="Состояние игры">
+      <div>
+        <p class="eyebrow">Аркада</p>
+        <h1>Ловец звезд</h1>
+      </div>
+
+      <div class="hud">
+        <div class="hud-item">
+          <span>Счет</span>
+          <strong id="score">0</strong>
+        </div>
+        <div class="hud-item">
+          <span>Жизни</span>
+          <strong id="lives">3</strong>
+        </div>
+        <div class="hud-item">
+          <span>Время</span>
+          <strong id="time">60</strong>
+        </div>
+        <div class="hud-item">
+          <span>Рекорд</span>
+          <strong id="best">0</strong>
+        </div>
+      </div>
+    </header>
+
+    <section class="stage" aria-label="Игровое поле">
+      <canvas id="gameCanvas" width="960" height="540"></canvas>
+
+      <div class="overlay is-visible" id="overlay">
+        <div class="overlay-panel">
+          <p class="overlay-kicker" id="overlayKicker">Готов к звездопаду?</p>
+          <h2 id="overlayTitle">Поймай сияние</h2>
+          <p id="overlayText">60 секунд, 3 жизни, один лучший результат.</p>
+          <button type="button" id="startButton">Начать</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
