@@ -1,0 +1,242 @@
+:root {
+  color-scheme: dark;
+  --bg: #07111f;
+  --panel: rgba(10, 22, 36, 0.84);
+  --panel-strong: rgba(15, 32, 48, 0.94);
+  --line: rgba(194, 215, 242, 0.18);
+  --text: #f4f8ff;
+  --muted: #9bb0ca;
+  --gold: #ffd45a;
+  --teal: #65d6ce;
+  --danger: #f06b56;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #07111f 0%, #10243b 54%, #142e42 100%);
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+button,
+canvas {
+  font: inherit;
+}
+
+.game-shell {
+  width: min(1180px, calc(100vw - 32px));
+  height: min(760px, calc(100vh - 32px));
+  min-height: 540px;
+  margin: 16px auto;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 14px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.eyebrow {
+  margin: 0 0 3px;
+  color: var(--teal);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.65rem, 3vw, 2.7rem);
+  line-height: 1;
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(84px, 1fr));
+  gap: 8px;
+  width: min(520px, 100%);
+}
+
+.hud-item {
+  min-height: 62px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  display: grid;
+  align-content: center;
+  gap: 4px;
+}
+
+.hud-item span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.hud-item strong {
+  color: var(--text);
+  font-size: 1.38rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stage {
+  position: relative;
+  min-height: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #081526;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 8, 17, 0.62);
+  backdrop-filter: blur(8px);
+}
+
+.overlay.is-visible {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.overlay-panel {
+  position: relative;
+  width: min(420px, 100%);
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: var(--panel-strong);
+  box-shadow: 0 22px 80px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.overlay-kicker {
+  margin: 0 0 8px;
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.overlay h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  line-height: 1;
+}
+
+.overlay p {
+  color: var(--muted);
+}
+
+#startButton {
+  min-width: 148px;
+  min-height: 48px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--gold), #ff9f43);
+  color: #1f1603;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(255, 180, 64, 0.28);
+}
+
+#startButton:hover {
+  transform: translateY(-1px);
+}
+
+#startButton:active {
+  transform: translateY(1px);
+}
+
+#startButton:focus-visible {
+  outline: 3px solid rgba(101, 214, 206, 0.75);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  body {
+    overflow: auto;
+  }
+
+  .game-shell {
+    width: min(100vw - 20px, 620px);
+    height: calc(100vh - 20px);
+    min-height: 620px;
+    margin: 10px auto;
+    gap: 10px;
+  }
+
+  .top-bar {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 14px;
+  }
+
+  .hud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .hud-item {
+    min-height: 54px;
+  }
+
+  .overlay-panel {
+    padding: 22px;
+  }
+}
+
+@media (max-height: 620px) and (min-width: 761px) {
+  .game-shell {
+    height: calc(100vh - 20px);
+    min-height: 480px;
+    margin: 10px auto;
+  }
+
+  .top-bar {
+    padding: 12px 16px;
+  }
+
+  .hud-item {
+    min-height: 52px;
+  }
+}
